@@ -1,10 +1,9 @@
-# gemsvault
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GEMS - Discover Hidden Treasures</title>
+    <title>GEMS Vault - Discover Hidden Treasures</title>
     <style>
         /* General Reset */
         * {
@@ -18,6 +17,7 @@
             background-color: #F9F6F1; /* Soft white */
             color: #5E2750; /* Deep prune */
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         header {
@@ -58,24 +58,25 @@
         }
 
         nav ul li {
-            margin: 0 1rem;
+            margin: 0 1.5rem;
         }
 
         nav ul li a {
             text-decoration: none;
             color: #5E2750;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
         }
 
         nav ul li a:hover {
-            color: #D4AF37; /* Gold hover effect */
+            color: #003366; /* Dark blue hover effect */
         }
 
         section {
             padding: 4rem 2rem;
             text-align: center;
+            background-color: #FFF;
         }
 
         section h2 {
@@ -102,6 +103,7 @@
 
         .category:hover {
             transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 51, 102, 0.3); /* Dark blue shadow on hover */
         }
 
         .category a {
@@ -110,21 +112,55 @@
             font-weight: bold;
         }
 
+        .category a:hover {
+            color: #003366; /* Dark blue link hover */
+        }
+
+        .search-section {
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .search-section input {
+            padding: 0.8rem;
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 1rem;
+            border: 1px solid #DDD;
+            border-radius: 5px;
+        }
+
+        .search-section button {
+            padding: 0.8rem 2rem;
+            background-color: #5E2750;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .search-section button:hover {
+            background-color: #003366; /* Dark blue button hover */
+        }
+
         footer {
             background-color: #5E2750;
             color: #F9F6F1;
             text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
+            padding: 2rem 0;
+            margin-top: 3rem;
         }
 
         footer a {
             color: #D4AF37;
             text-decoration: none;
+            margin: 0 1rem;
+            font-size: 1.2rem;
         }
 
         footer a:hover {
-            text-decoration: underline;
+            color: #003366; /* Dark blue hover for footer links */
         }
 
         .container {
@@ -153,7 +189,7 @@
         }
 
         button:hover {
-            background-color: #D4AF37;
+            background-color: #003366; /* Dark blue button hover */
         }
 
         .hidden {
@@ -165,7 +201,7 @@
     <!-- Hero Section -->
     <header>
         <div>
-            <h1>GEMS</h1>
+            <h1>GEMS Vault</h1>
             <p>Discover hidden treasures in movies, books, and music. Curate, share, and explore a world beyond the spotlight.</p>
         </div>
     </header>
@@ -178,6 +214,7 @@
             <li><a href="#music">Music</a></li>
             <li><a href="#collections">My Gems Collection</a></li>
             <li><a href="#friends">My Friends</a></li>
+            <li><a href="#search">Search</a></li>
             <li><a href="#about">About</a></li>
         </ul>
     </nav>
@@ -207,41 +244,42 @@
                 <a href="#collections">Explore Now</a>
             </div>
             <div class="category">
-                <h3>My Friends</h3>
-                <p>Connect and share recommendations.</p>
-                <a href="#friends">Explore Now</a>
+                <h3>Search</h3>
+                <p>Find treasures from YouTube, Netflix, and Spotify.</p>
+                <a href="#search">Search Now</a>
             </div>
         </div>
     </section>
 
-    <!-- User Login & Friends Section -->
-    <section>
-        <div class="container" id="auth">
-            <h2>Sign Up / Login</h2>
-            <input type="email" id="email" placeholder="Email">
-            <input type="password" id="password" placeholder="Password">
-            <button onclick="signUp()">Sign Up</button>
-            <button onclick="logIn()">Log In</button>
-            <p id="error-message" style="color: red;"></p>
-        </div>
-
-        <div class="container hidden" id="dashboard">
-            <h2>Welcome, <span id="username">User</span></h2>
-            <p>Your Friends:</p>
-            <div id="friends-list"></div>
-            <input type="text" id="add-friend" placeholder="Enter username to add">
-            <button onclick="addFriend()">Add Friend</button>
-            <button onclick="logOut()">Log Out</button>
+    <!-- Search Section -->
+    <section id="search">
+        <h2>Search for Gems</h2>
+        <div class="search-section">
+            <input type="text" id="search-query" placeholder="Search for a movie, book, or song...">
+            <button onclick="search()">Search</button>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 GEMS | <a href="#about">About</a></p>
+        <p>&copy; 2024 GEMS Vault | <a href="#about">About Us</a></p>
+        <p>
+            <a href="https://twitter.com/gemsvault" target="_blank">Twitter</a>
+            <a href="https://instagram.com/gemsvault" target="_blank">Instagram</a>
+            <a href="https://facebook.com/gemsvault" target="_blank">Facebook</a>
+        </p>
     </footer>
 
-    <script type="module">
-        // Include the Firebase script (same as provided earlier).
-        // Firebase configuration, sign-up, login, and friends system as before.
+    <script>
+        // Search Functionality
+        function search() {
+            const query = document.getElementById("search-query").value;
+            if (!query) {
+                alert("Please enter a search term!");
+                return;
+            }
+            window.open(`https://www.google.com/search?q=${query}`, "_blank");
+        }
     </script>
 </body>
 </html>
